@@ -1,0 +1,39 @@
+<div class="row">
+
+    <!-- Blog Post Content Column -->
+    <div class="col-md-12">
+        <h2 class="post">All Posts <a class="btn btn-info" ui-sref="post" role="button">New Post</a></h2>
+        <div class="post-item" ng-repeat="post in blogCtrl.posts">
+            <a ui-sref="detail({blogId:post.id})">
+                <h2>{{post.title}}</h2>
+                <p>{{post.pubDate | date: 'medium'}}</p>
+            </a>
+            <div class="pull-right">
+                <button type="button" class="btn btn-warning">change</button>
+                <button type="button" class="btn btn-danger" ng-click="deletePost(post)">delete</button>
+            </div>
+        </div>
+
+    </div>
+
+    <nav class="text-center">
+        <ul class="pagination">
+            <li>
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li>
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+</div>

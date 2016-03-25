@@ -1,0 +1,20 @@
+<div class="row marketing">
+    <!-- Main Content -->
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+            <h2 class="post">Latest Posts</h2>
+            <div class="post-item" ng-repeat="post in indexCtrl.posts">
+                <a ui-sref="detail({blogId:post.id})">
+                    <h2>{{post.title}}</h2>
+                    <p>{{post.pubDate | date: 'medium'}}</p>
+                </a>
+            </div>
+            <!-- Pager -->
+            <ul class="pager">
+                <li>
+                    <a ui-sref="blog"><i class="fa fa-paper-plane-o"></i>&nbsp;More</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

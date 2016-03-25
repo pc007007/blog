@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cheng</title>
+    <!-- highlight-->
+    <link rel="stylesheet" href="/webjars/highlightjs/9.2.0/styles/github.css">
+    <script src="/webjars/highlightjs/9.2.0/highlight.min.js"></script>
+    <!-- css & js library -->
+    <link href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/webjars/bootstrap-social/4.9.0/assets/css/font-awesome.css" rel="stylesheet">
+    <link href="/webjars/bootstrap-social/4.9.0/bootstrap-social.css" rel="stylesheet">
+    <script src="/webjars/angularjs/1.5.0/angular.min.js"></script>
+    <script src="/webjars/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+    <script src="/webjars/angular-resource/1.5.2/angular-resource.min.js"></script>
+    <script src="/webjars/angular-sanitize/1.3.11/angular-sanitize.min.js"></script>
+    <script src="/webjars/marked/0.3.5/lib/marked.js"></script>
+    <script src="/webjars/ace-builds/1.2.3/src-min-noconflict/ace.js"></script>
+    <script src="/webjars/angular-ui-ace/0.2.3/ui-ace.js"></script>
+    <script src="/js/angular-disqus.js"></script>
+    <script src="/blogApp/app.js"></script>
+    <script src="/blogApp/blogService.js"></script>
+    <script src="/blogApp/home/home.js"></script>
+    <script src="/blogApp/blog/blog.js"></script>
+    <script src="/blogApp/project/project.js"></script>
+    <!-- fonts -->
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Lobster&effect=shadow-multiple">
+    <!-- Custom styles for this template -->
+    <link href="css/jumbotron-narrow.css" rel="stylesheet"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <base href="/">
+    <style type="text/css">
+        [ng\:cloak], [ng-cloak], .ng-cloak {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body ng-app="blogApp" ng-cloak class="ng-cloak">
+
+<div class="header clearfix">
+    <div class="container">
+        <nav>
+            <ul class="nav nav-pills pull-right" ng-controller="indexController as indexCtrl">
+                <li role="presentation" ng-class="{'active': indexCtrl.state.current.name === 'home'}">
+                    <a ui-sref="home">Home</a>
+                </li>
+                <li role="presentation" ng-class="{active: indexCtrl.state.current.name === 'blog'
+                || indexCtrl.state.current.name === 'detail'}">
+                    <a ui-sref="blog">Blog</a>
+                </li>
+                <li role="presentation" ng-class="{active: indexCtrl.state.current.name === 'project'}">
+                    <a ui-sref="project">Project</a>
+                </li>
+                <li role="presentation" ng-class="{active: indexCtrl.state.current.name === 'contact'}">
+                    <a ui-sref="contact">Contact</a>
+                </li>
+            </ul>
+        </nav>
+        <h3 class="text-muted text-band font-effect-shadow-multiple"><a ui-sref="home">Cheng</a></h3>
+    </div>
+</div>
+
+<div class="container">
+    <div ui-view></div>
+    <div ui-view="title"></div>
+    <div ui-view="content"></div>
+    <footer class="footer">
+        <p>&copy; 2016 Chengp, Inc.</p>
+    </footer>
+</div> <!-- /container -->
+
+</body>
+</html>
