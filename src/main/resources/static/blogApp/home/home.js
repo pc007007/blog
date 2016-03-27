@@ -18,7 +18,7 @@ angular.module("blogApp.home",[])
             }
         })
 })
-.controller('indexController', function ($state, $http) {
+.controller('indexController', function ($state, $http, $rootScope) {
     var self = this;
 
     self.state = $state;
@@ -32,4 +32,11 @@ angular.module("blogApp.home",[])
         })
 
     })
+
+    self.logout = function() {
+        $http.post('/logout', {}).finally(function() {
+            $rootScope.authenticated = false;
+            $state.go('auth');
+        });
+    }
 });

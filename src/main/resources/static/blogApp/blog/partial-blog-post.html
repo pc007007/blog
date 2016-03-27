@@ -1,14 +1,15 @@
 <div class="container-fluid">
     <h1>{{post.title}}</h1>
     <hr>
-    <div id="outputText" ng-bind-html="blogPostCtrl.outputText"></div>
+    <div id="outputText" ng-bind-html="outputText"></div>
     <br>
 
-    <div ng-click="toggle = !toggle" ng-hide="toggle">Title: {{post.title}}</div>
+<hr>
+    <button type="button" class="btn btn-success" ng-click="addPost()">Save</button>
+    <div ng-click="toggle = !toggle" ng-hide="toggle" class="text-center">{{post.title}}</div>
     <input type="text" class="form-control" placeholder="title" ng-show="toggle" ng-blur="toggle = !toggle"
            ng-model="post.title">
 
     <div ui-ace id="inputText" ng-model="post.content"></div>
     <!--<textarea class="form-control" id="inputText" ng-model="blogPostCtrl.inputText"></textarea>-->
-    <button type="button" class="btn btn-default" ng-click="addPost()">Submit</button>
 </div>

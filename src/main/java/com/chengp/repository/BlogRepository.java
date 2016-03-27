@@ -3,7 +3,7 @@ package com.chengp.repository;
 import com.chengp.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.hateoas.ExposesResourceFor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,8 +14,17 @@ import java.util.List;
 @Repository
 public interface BlogRepository extends JpaRepository<Post, Integer>{
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @Override
+    void delete(Integer id);
+
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @Override
+    Post save(Post post);
+/*
     List<Post> findTop4ByAuthorOrderByPubDateDesc(@Param("author") String author);
 
-    List<Post> findAllByAuthorOrderByPubDateDesc(@Param("author") String author);
+    List<Post> findAllByAuthorOrderByPubDateDesc(@Param("author") String author);*/
 
 }

@@ -1,0 +1,16 @@
+this is authorization page.
+
+<form class="form-signin" ng-hide="authenticated" ng-submit="authCtrl.login()">
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <label for="inputEmail" class="sr-only">username</label>
+    <input type="text" id="inputEmail" class="form-control" placeholder="username"
+           ng-model="authCtrl.credentials.username" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password"
+           ng-model="authCtrl.credentials.password" required>
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
+</form>
+
+<div ng-show="authenticated">
+    <button class="btn btn-primary" ng-click="authCtrl.logout()">Logout</button>
+</div>
