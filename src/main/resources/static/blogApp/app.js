@@ -6,6 +6,7 @@ var blogApp = angular.module('blogApp', [
     'ngSanitize',
     'ngDisqus',
     'ui.ace',
+    'ui.bootstrap',
     'ngResource',
     'lodash',
     'blogApp.home',
@@ -52,7 +53,7 @@ angular.module('lodash', [])
     });
 
 blogApp.controller('blogAppController',function($rootScope, $http){
-    
+
     var authenticate = function(credentials, callback) {
 
         var headers = credentials ? {authorization : "Basic "

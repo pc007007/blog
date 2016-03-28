@@ -30,26 +30,39 @@ app.config(function ($stateProvider) {
         })
     ;
 });
-app.controller('blogController', function ($http, $state, $scope, $rootScope) {
+app.controller('blogController', function ($http, $state, $scope, $log) {
     var self = this;
-    
-    $http.get('/api/posts?sort=pubDate,desc').success(function (data) {
 
-        self.posts = data._embedded.posts;
+    $scope.currentPage = 1;
+    $scope.pageSize = 3;
 
-        self.posts.forEach(function (post) {
-            post.id = post._links.self.href.slice(32);
-        })
+    self.setPage = function (currentPage) {
+        $http.get('/api/posts?page=' + (currentPage-1) + '&size=' + $scope.pageSize + '&sort=pubDate,desc').success(function (data) {
+
+            self.posts = data._embedded.posts;
+            self.posts.forEach(function (post) {
+                post.id = post._links.self.href.slice(32);
+            });
+
+            self.totalElements = data.page.totalElements;
+        });
+    };
+
+    self.setPage(1);
+
+    $scope.$watch('currentPage',function(current){
+        self.setPage(current);
     });
 
-    $scope.deletePost = function(post){
-        $http.delete('/api/posts/'+post.id).success(function () {
-            _.remove(self.posts,post);
+    $scope.deletePost = function (post) {
+        $http.delete('/api/posts/' + post.id).success(function () {
+            _.remove(self.posts, post);
         })
     };
-    $scope.changePost = function(post){
-        $state.go('update',{blogId:post.id});
-    }
+    $scope.changePost = function (post) {
+        $state.go('update', {blogId: post.id});
+    };
+    $scope.maxSize = 5;
 });
 app.controller('blogDetailController', function ($http, $stateParams) {
     var self = this;
@@ -68,15 +81,15 @@ app.controller('blogPostController', function ($http, $scope, Post, $state) {
     $scope.post.content = '';
     $scope.post.author = 'pc';
 
-    $scope.$watch('post.content', function(current, original) {
+    $scope.$watch('post.content', function (current, original) {
         $scope.outputText = marked(current);
     });
 
     $scope.toggle = false;
 
-    $scope.addPost = function(){
+    $scope.addPost = function () {
         $scope.post.pubDate = Date.now();
-        $scope.post.$save(function() {
+        $scope.post.$save(function () {
                 $state.go('blog');
             }
         );
@@ -89,7 +102,7 @@ app.controller('blogUpdateController', function ($http, $scope, Post, $state, $l
     $scope.post.content = '';
     $scope.post.author = 'pc';
 
-    $scope.$watch('post.content', function(current) {
+    $scope.$watch('post.content', function (current) {
         $scope.outputText = marked(current);
     });
 
@@ -101,8 +114,8 @@ app.controller('blogUpdateController', function ($http, $scope, Post, $state, $l
 
     $scope.toggle = false;
 
-    $scope.addPost = function(){
-        $http.put('http://localhost:8080/api/posts/'+$stateParams.blogId,$scope.post).success(function(){
+    $scope.addPost = function () {
+        $http.put('http://localhost:8080/api/posts/' + $stateParams.blogId, $scope.post).success(function () {
             $state.go('blog');
         })
     }

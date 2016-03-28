@@ -55,6 +55,7 @@ dependencies {
     compile('org.webjars:angular-ui-ace:0.2.3')
     compile('org.webjars.bower:angular-resource:1.5.2')
     compile('org.webjars.bower:lodash:4.6.1')
+    compile('org.webjars:angular-ui-bootstrap:1.2.5')
 
     /*--------------------------------- utils -----------------------------------*/
     compile('org.projectlombok:lombok:1.16.8')
