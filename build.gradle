@@ -70,5 +70,5 @@ task wrapper(type: Wrapper) {
 }
 
 task stage {
-    dependsOn bootRun
+    dependsOn build
 }
