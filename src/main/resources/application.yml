@@ -4,11 +4,11 @@ spring:
   datasource:
 #    type: com.zaxxer.hikari.HikariDataSource
 #   url: jdbc:mysql://localhost:3306/db?useUnicode=true&characterEncoding=UTF-8
-#    url: jdbc:postgresql://ec2-54-225-112-119.compute-1.amazonaws.com:5432/d7p4o0sth361vr
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://ec2-54-225-112-119.compute-1.amazonaws.com:5432/d7p4o0sth361vr
+#    url: jdbc:postgresql://localhost:5432/postgres
     pool-name: SpringBootHikariCP
-#    username: csnwmmvbqupqfx
-#    password: Kg-lFNHr7BSWZB1ve9cT6rhc9j
+    username: csnwmmvbqupqfx
+    password: Kg-lFNHr7BSWZB1ve9cT6rhc9j
     driver-class-name: org.postgresql.Driver
   jpa:
 #   database-platform: org.hibernate.dialect.MySQLDialect
