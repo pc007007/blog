@@ -40,7 +40,7 @@ dependencies {
 
     /*------------------------------- database ----------------------------------*/
     compile('com.zaxxer:HikariCP:2.4.4')
-    compile('org.postgresql:postgresql:9.4.1207')
+    compile('org.postgresql:postgresql:9.4-1201-jdbc4')
     runtime('mysql:mysql-connector-java')
 
     /*-------------------------------- webjar -----------------------------------*/
