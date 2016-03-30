@@ -13,10 +13,9 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
-apply plugin: 'war'
 
 
-war {
+jar {
     baseName = 'blog'
     version = '0.0.1-SNAPSHOT'
 }
