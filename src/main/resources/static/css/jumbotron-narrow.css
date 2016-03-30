@@ -142,4 +142,9 @@ A:active{text-decoration:none;}
     font-family: 'Lobster';
 }
 
-.ace_editor { height: 400px; }
+.ace_editor { height: 600px;}
+
+pre{
+    color: #C2D3DA;
+    background-color: #333333;
+}
