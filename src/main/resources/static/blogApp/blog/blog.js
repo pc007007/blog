@@ -66,7 +66,7 @@ app.controller('blogController', function ($http, $state, $scope, $log) {
 });
 app.controller('blogDetailController', function ($http, $stateParams) {
     var self = this;
-    $http.get('/api/posts/' + $stateParams.blogId).success(function (data) {
+    $http.get(/*'/api/posts/' + */$stateParams.blogId).success(function (data) {
         self.post = data;
 
         self.post.id = self.post._links.self.href;
