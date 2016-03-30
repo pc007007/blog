@@ -4,7 +4,7 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
 #   url: jdbc:mysql://localhost:3306/db?useUnicode=true&characterEncoding=UTF-8
-    url: postgres://csnwmmvbqupqfx:Kg-lFNHr7BSWZB1ve9cT6rhc9j@ec2-54-225-112-119.compute-1.amazonaws.com:5432/d7p4o0sth361vr
+    url: jdbc:postgres://csnwmmvbqupqfx:Kg-lFNHr7BSWZB1ve9cT6rhc9j@ec2-54-225-112-119.compute-1.amazonaws.com:5432/d7p4o0sth361vr
     pool-name: SpringBootHikariCP
     username: csnwmmvbqupqfx
     password: Kg-lFNHr7BSWZB1ve9cT6rhc9j
