@@ -65,10 +65,10 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-/*task wrapper(type: Wrapper) {
+task wrapper(type: Wrapper) {
     gradleVersion = '2.9'
-}*/
+}
 
 task stage {
-    dependsOn build
+    dependsOn bootRun
 }
