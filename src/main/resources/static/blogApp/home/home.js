@@ -28,7 +28,7 @@ angular.module("blogApp.home",[])
         self.posts = data._embedded.posts;
 
         self.posts.forEach(function (post) {
-            post.id = post._links.self.href.slice(32);
+            post.id = post._links.self.href.slice(42);
         })
 
     })
