@@ -34,16 +34,13 @@ app.controller('blogController', function ($http, $state, $scope, $log) {
     var self = this;
 
     $scope.currentPage = 1;
-    $scope.pageSize = 3;
+    $scope.pageSize = 7;
 
     self.setPage = function (currentPage) {
         $http.get('/api/posts?page=' + (currentPage-1) + '&size=' + $scope.pageSize + '&sort=pubDate,desc').success(function (data) {
 
             self.posts = data._embedded.posts;
-            self.posts.forEach(function (post) {
-                post.id = post._links.self.href.slice(42);
-            });
-
+            
             self.totalElements = data.page.totalElements;
         });
     };
@@ -62,7 +59,7 @@ app.controller('blogController', function ($http, $state, $scope, $log) {
     $scope.changePost = function (post) {
         $state.go('update', {blogId: post.id});
     };
-    $scope.maxSize = 5;
+    $scope.maxSize = 7;
 });
 app.controller('blogDetailController', function ($http, $stateParams) {
     var self = this;
