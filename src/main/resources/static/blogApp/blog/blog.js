@@ -41,7 +41,7 @@ app.controller('blogController', function ($http, $state, $scope, $log) {
 
             self.posts = data._embedded.posts;
             self.posts.forEach(function (post) {
-                post.id = post._links.self.href.slice(32);
+                post.id = post._links.self.href.slice(42);
             });
 
             self.totalElements = data.page.totalElements;
@@ -66,7 +66,7 @@ app.controller('blogController', function ($http, $state, $scope, $log) {
 });
 app.controller('blogDetailController', function ($http, $stateParams) {
     var self = this;
-    $http.get(/*'/api/posts/' + */$stateParams.blogId).success(function (data) {
+    $http.get('/api/posts/' + $stateParams.blogId).success(function (data) {
         self.post = data;
 
         self.post.id = self.post._links.self.href;
