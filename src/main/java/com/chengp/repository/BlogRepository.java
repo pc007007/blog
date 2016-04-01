@@ -22,9 +22,5 @@ public interface BlogRepository extends JpaRepository<Post, Integer>{
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Override
     Post save(Post post);
-/*
-    List<Post> findTop4ByAuthorOrderByPubDateDesc(@Param("author") String author);
-
-    List<Post> findAllByAuthorOrderByPubDateDesc(@Param("author") String author);*/
 
 }

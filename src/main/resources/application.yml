@@ -4,14 +4,14 @@ server:
   port: 8080
 spring:
   profiles:
-    active: production
+    active: dev
   data:
     rest:
       base-path: /api
 
 ---
 spring:
-  profiles: developer
+  profiles: dev
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://localhost:3306/db?useUnicode=true&characterEncoding=UTF-8
@@ -32,6 +32,8 @@ spring:
 spring:
   profiles: production
   datasource:
+     type: com.zaxxer.hikari.HikariDataSource
+     pool-name: SpringBootHikariCP
      url: jdbc:postgresql://ec2-54-225-112-119.compute-1.amazonaws.com:5432/d7p4o0sth361vr
      username: csnwmmvbqupqfx
      password: Kg-lFNHr7BSWZB1ve9cT6rhc9j
