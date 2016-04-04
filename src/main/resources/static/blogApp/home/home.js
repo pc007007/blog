@@ -23,7 +23,7 @@ angular.module("blogApp.home",[])
 
     self.state = $state;
 
-    $http.get('/api/posts?size=5&sort=pubDate,desc').success(function (data) {
+    $http.get('/api/posts?projection=noContent&size=5&sort=pubDate,desc').success(function (data) {
 
         self.posts = data._embedded.posts;
 

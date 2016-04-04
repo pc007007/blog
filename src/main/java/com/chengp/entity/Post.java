@@ -27,8 +27,6 @@ public class Post {
     private String content;
 
 
-
-
     public Integer getId() {
         return id;
     }

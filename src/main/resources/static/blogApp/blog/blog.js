@@ -37,7 +37,7 @@ app.controller('blogController', function ($http, $state, $scope, $log) {
     $scope.pageSize = 7;
 
     self.setPage = function (currentPage) {
-        $http.get('/api/posts?page=' + (currentPage-1) + '&size=' + $scope.pageSize + '&sort=pubDate,desc').success(function (data) {
+        $http.get('/api/posts?projection=noContent&page=' + (currentPage-1) + '&size=' + $scope.pageSize + '&sort=pubDate,desc').success(function (data) {
 
             self.posts = data._embedded.posts;
             

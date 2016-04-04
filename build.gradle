@@ -61,8 +61,12 @@ dependencies {
     compile('org.projectlombok:lombok:1.16.8')
     compile('org.pegdown:pegdown:1.6.0')
 
-
+    /*--------------------------------- test -----------------------------------*/
+    testCompile('junit:junit:4.12')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.mockito:mockito-all:1.10.19')
+    testCompile('com.jayway.jsonpath:json-path:2.2.0')
+
 }
 
 task wrapper(type: Wrapper) {
