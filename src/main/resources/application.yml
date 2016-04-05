@@ -2,14 +2,14 @@ server:
   port: 8080
 spring:
   profiles:
-    active: dev
+    active: production
   data:
     rest:
       base-path: /api
 
 ---
 spring:
-  profiles: production
+  profiles: dev
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://localhost:3306/db?useUnicode=true&characterEncoding=UTF-8
