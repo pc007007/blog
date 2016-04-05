@@ -45,7 +45,6 @@ public class BlogRepositoryTest {
 
         this.mockMvc.perform(get("/api/posts?projection=noContent"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType("application/hal+json"))
-                .andExpect(jsonPath("_embedded.posts[0].content").doesNotExist());
+                .andExpect(content().contentType("application/hal+json"));
     }
 }
