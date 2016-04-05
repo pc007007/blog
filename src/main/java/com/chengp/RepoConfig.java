@@ -1,6 +1,7 @@
 package com.chengp;
 
 import com.chengp.entity.Post;
+import com.chengp.entity.Tag;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
@@ -15,5 +16,6 @@ public class RepoConfig extends RepositoryRestConfigurerAdapter {
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
         config.exposeIdsFor(Post.class);
+        config.exposeIdsFor(Tag.class);
     }
 }

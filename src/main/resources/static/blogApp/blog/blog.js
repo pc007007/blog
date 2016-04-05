@@ -95,11 +95,9 @@ app.controller('blogPostController', function ($http, $scope, Post, $state, $log
             $state.go('blog');
         });*/
         $http.post("/api/posts",$scope.post).then(function(response){
-            $log.log(response);
             $scope.tags.forEach(function(tag){
                tag.post = response.data._links.self.href;
-                $log.log(tag);
-                $http.post("/api/tags",tag);
+               $http.post("/api/tags",tag);
             });
             $state.go('blog');
         });
@@ -110,7 +108,6 @@ app.controller('blogPostController', function ($http, $scope, Post, $state, $log
         a.name = tag.name;
         a.color = tag.color;
         $scope.tags.push(a);
-        $log.log($scope.tags);
     };
     
     $scope.removeTag = function(tag){
@@ -124,6 +121,8 @@ app.controller('blogUpdateController', function ($http, $scope, Post, $state, $l
     $scope.post.content = '';
     $scope.post.author = 'pc';
 
+
+
     $scope.$watch('post.content', function (current) {
         $scope.outputText = marked(current);
     });
@@ -136,10 +135,32 @@ app.controller('blogUpdateController', function ($http, $scope, Post, $state, $l
         $scope.post.pubDate = data.pubDate;
     });
 
+    $http.get('/api/posts/' + $stateParams.blogId + '/tags').success(function (data) {
+        $scope.tags = data._embedded.tags;
+        $log.log($scope.tags);
+    });
+
+    $scope.removeTag = function(tag){
+        $http.delete('/api/tags/' + tag.id).success(function () {
+            _.remove($scope.tags, tag);
+        });
+    };
+
+    $scope.addTag = function(tag) {
+        var a = {};
+        a.name = tag.name;
+        a.color = tag.color;
+        a.post = location.origin + '/api/posts/' + $stateParams.blogId;
+        $log.log(a);
+        $http.post('/api/tags',a).success(function () {
+            $scope.tags.push(a);
+        });
+    };
 
     $scope.addPost = function () {
-        $http.put('/api/posts/' + $stateParams.blogId, $scope.post).success(function () {
+        $http.put('/api/posts/' + $stateParams.blogId, $scope.post).then(function (response) {
             $state.go('blog');
-        })
-    }
+        });
+    };
+
 });
