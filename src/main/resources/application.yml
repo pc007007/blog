@@ -9,7 +9,7 @@ spring:
 
 ---
 spring:
-  profiles: dev
+  profiles: production
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://localhost:3306/db?useUnicode=true&characterEncoding=UTF-8
