@@ -1,16 +1,22 @@
 package com.chengp.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by pc on 3/20/16.
  */
 @Entity
-@Table(name = "post")
+@Table(name = "POST")
 public class Post {
 
     @Id @GeneratedValue
+    @Column(name = "post_id")
     private Integer id;
 
     @Column(name = "title",nullable = false)
@@ -26,6 +32,16 @@ public class Post {
     @Column(name = "content", length = 100000)
     private String content;
 
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Tag> tags = new ArrayList<>();
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 
     public Integer getId() {
         return id;

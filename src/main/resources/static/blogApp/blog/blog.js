@@ -71,14 +71,15 @@ app.controller('blogDetailController', function ($http, $stateParams) {
         self.post.content = marked(data.content);
     })
 });
-app.controller('blogPostController', function ($http, $scope, Post, $state) {
+app.controller('blogPostController', function ($http, $scope, Post, $state, $log) {
     $scope.post = new Post();
 
     $scope.post.title = 'title';
     $scope.post.content = '';
     $scope.post.author = 'pc';
+    $scope.tags = [];
 
-    $scope.$watch('post.content', function (current, original) {
+    $scope.$watch('post.content', function (current) {
         $scope.outputText = marked(current);
     });
 
@@ -86,11 +87,31 @@ app.controller('blogPostController', function ($http, $scope, Post, $state) {
 
     $scope.addPost = function () {
         $scope.post.pubDate = Date.now();
-        $scope.post.$save(function () {
-                $state.go('blog');
-            }
-        );
-    }
+/*        $http.post("/api/posts",$scope.post).success(function(){
+            $state.go('blog');
+        });*/
+        $http.post("/api/posts",$scope.post).then(function(response){
+            $log.log(response);
+            $scope.tags.forEach(function(tag){
+               tag.post = response.data._links.self.href;
+                $log.log(tag);
+                $http.post("/api/tags",tag);
+            });
+            $state.go('blog');
+        });
+    };
+
+    $scope.addTag = function(tag) {
+        var a = {};
+        a.name = tag.name;
+        a.color = tag.color;
+        $scope.tags.push(a);
+        $log.log($scope.tags);
+    };
+    
+    $scope.removeTag = function(tag){
+        _.remove($scope.tags, tag);
+    };
 });
 app.controller('blogUpdateController', function ($http, $scope, Post, $state, $log, $stateParams) {
     $scope.post = new Post();
@@ -103,13 +124,14 @@ app.controller('blogUpdateController', function ($http, $scope, Post, $state, $l
         $scope.outputText = marked(current);
     });
 
+    $scope.toggle = false;
+
     $http.get('/api/posts/' + $stateParams.blogId).success(function (data) {
         $scope.post.title = data.title;
         $scope.post.content = data.content;
         $scope.post.pubDate = data.pubDate;
     });
 
-    $scope.toggle = false;
 
     $scope.addPost = function () {
         $http.put('/api/posts/' + $stateParams.blogId, $scope.post).success(function () {

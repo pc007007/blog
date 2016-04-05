@@ -6,6 +6,9 @@
         <div class="post-item" ng-repeat="post in blogCtrl.posts">
             <a ui-sref="detail({blogId:post.id})">
                 <h2>{{post.title}}</h2>
+                <span ng-repeat=" tag in post.tags">
+                    <span class="label" ng-style="{'background-color':'#'+tag.color}">{{tag.name}}</span>&nbsp;
+                </span>
                 <p>{{post.pubDate | date: 'medium'}}</p>
             </a>
             <div class="pull-right" ng-show="authenticated">
