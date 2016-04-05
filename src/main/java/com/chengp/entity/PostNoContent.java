@@ -18,5 +18,5 @@ interface PostNoContent {
 
     String getPubDate();
 
-    List<Tag> getTags();
+/*    List<Tag> getTags();*/
 }
