@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 public class BlogRepositoryTest {
 
-    protected MockMvc mockMvc;
+/*    protected MockMvc mockMvc;
 
     @Autowired
     private WebApplicationContext context;
@@ -46,5 +46,5 @@ public class BlogRepositoryTest {
         this.mockMvc.perform(get("/api/posts?projection=noContent"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/hal+json"));
-    }
+    }*/
 }
