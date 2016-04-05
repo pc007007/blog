@@ -7,7 +7,7 @@ import javax.persistence.*;
 /**
  * Created by pc on 4/4/16.
  */
-@Entity
+/*@Entity
 @Table(name = "TAG")
 public class Tag {
 
@@ -56,4 +56,4 @@ public class Tag {
     public void setPost(Post post) {
         this.post = post;
     }
-}
+}*/

@@ -12,15 +12,17 @@ spring:
   profiles: dev
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/db?useUnicode=true&characterEncoding=UTF-8
+#    url: jdbc:mysql://localhost:3306/db?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:postgresql://localhost:5432/postgres
     pool-name: SpringBootHikariCP
-    username: pc
-    password: 123456
+#    username: pc
+#    password: 123456
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
+#    database-platform: org.hibernate.dialect.MySQLDialect
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
     properties:
       hibernate:
