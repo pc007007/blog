@@ -158,7 +158,7 @@ app.controller('blogUpdateController', function ($http, $scope, Post, $state, $l
     };
 
     $scope.addPost = function () {
-        $http.put('/api/posts/' + $stateParams.blogId, $scope.post).then(function (response) {
+        $http.put('/api/posts/' + $stateParams.blogId, $scope.post).success(function () {
             $state.go('blog');
         });
     };
