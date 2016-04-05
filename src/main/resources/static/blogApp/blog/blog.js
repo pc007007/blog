@@ -30,7 +30,7 @@ app.config(function ($stateProvider) {
         })
     ;
 });
-app.controller('blogController', function ($http, $state, $scope, $log) {
+app.controller('blogController', function ($http, $state, $scope) {
     var self = this;
 
     $scope.currentPage = 1;
@@ -61,7 +61,7 @@ app.controller('blogController', function ($http, $state, $scope, $log) {
     };
     $scope.maxSize = 7;
 });
-app.controller('blogDetailController', function ($http, $stateParams) {
+app.controller('blogDetailController', function ($http, $stateParams, $scope) {
     var self = this;
     $http.get('/api/posts/' + $stateParams.blogId).success(function (data) {
         self.post = data;
@@ -69,7 +69,11 @@ app.controller('blogDetailController', function ($http, $stateParams) {
         self.post.id = self.post._links.self.href;
 
         self.post.content = marked(data.content);
-    })
+    });
+
+    $http.get('/api/posts/' + $stateParams.blogId + '/tags').success(function (data) {
+        $scope.tags = data._embedded.tags;
+    });
 });
 app.controller('blogPostController', function ($http, $scope, Post, $state, $log) {
     $scope.post = new Post();

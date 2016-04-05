@@ -1,9 +1,13 @@
 <div class="row">
     <div class="col-md-12">
         <h1>{{blogDetailCtrl.post.title}}</h1>
-        <p><i class="fa fa-calendar"></i>&nbsp; {{blogDetailCtrl.post.pubDate | date: 'medium'}} &nbsp;&nbsp;
+        <span ng-repeat=" tag in tags">
+            <span class="label" ng-style="{'background-color':'#'+tag.color}">{{tag.name}}</span>&nbsp;
+        </span>
+        <h5>
+            <i class="fa fa-calendar"></i>&nbsp; {{blogDetailCtrl.post.pubDate | date: 'medium'}} &nbsp;&nbsp;
             <i class="fa fa-user"></i>&nbsp; {{blogDetailCtrl.post.author}}&nbsp;&nbsp;
-        </p>
+        </h5>
         <hr>
         <div ng-bind-html="blogDetailCtrl.post.content"></div>
         <hr>
