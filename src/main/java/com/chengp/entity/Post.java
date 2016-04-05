@@ -32,7 +32,7 @@ public class Post {
     @Column(name = "content", length = 100000)
     private String content;
 
-/*    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Tag> tags = new ArrayList<>();
 
     public List<Tag> getTags() {
@@ -41,7 +41,7 @@ public class Post {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
-    }*/
+    }
 
     public Integer getId() {
         return id;
