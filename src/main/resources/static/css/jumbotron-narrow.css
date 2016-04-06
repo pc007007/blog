@@ -152,3 +152,12 @@ pre{
 .tag_label {
     display: inline-block;
 }
+
+#brand_name:hover {
+    color: #55ACEE;
+}
+
+.tag_label a:hover {
+    color: black;
+    background-color: #e5e5e5 !important;
+}

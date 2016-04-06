@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-md-12">
         <h1>{{blogDetailCtrl.post.title}}</h1>
-        <span ng-repeat=" tag in tags">
-            <span class="label" ng-style="{'background-color':'#'+tag.color}">{{tag.name}}</span>&nbsp;
+        <span class="tag_label" ng-repeat=" tag in tags">
+            <a class="label" href="#" ng-style="{'background-color':'#'+tag.color}">{{tag.name}}</a>&nbsp;
         </span>
         <h5>
             <i class="fa fa-calendar"></i>&nbsp; {{blogDetailCtrl.post.pubDate | date: 'medium'}} &nbsp;&nbsp;

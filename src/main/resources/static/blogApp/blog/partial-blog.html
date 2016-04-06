@@ -9,7 +9,7 @@
                 <h2>{{post.title}}</h2>
                 <p>{{post.pubDate | date: 'longDate'}}</p>
                 <div class="tag_label" ng-repeat=" tag in post.tags">
-                    <span class="label" ng-style="{'background-color':'#'+tag.color}">{{tag.name}}</span>&nbsp;
+                    <a class="label" href="#" ng-style="{'background-color':'#'+tag.color}">{{tag.name}}</a>&nbsp;
                 </div>
             </a>
             <div class="pull-right" ng-show="authenticated">
