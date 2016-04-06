@@ -11,11 +11,19 @@
     <br>
     <button type="text" uib-popover-template="'myPopoverTemplate.html'"  popover-trigger="focus" class="btn btn-default" ng-click="showTag()" popover-placement="right">find tags</button>
     <br>
-    tag name:<input type="text" ng-model="tag.name">
-    tag color:<input type="text" ng-model="tag.color">
-    <button type="button" class="btn btn-primary" ng-click="addTag(tag)">add tag</button>
-    <button type="button" class="btn btn-success" ng-click="addPost()">Save</button>
-    <div ng-click="toggle = !toggle" ng-hide="toggle" class="text-center">{{post.title}}</div>
+    <div class="row">
+        <div class="col-md-3">
+            <input type="text" ng-model="tag.name" class="form-control" placeholder="tag name">
+        </div>
+        <div class="col-md-3">
+            <input type="text" ng-model="tag.color" class="form-control" placeholder="tag color">
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-primary" ng-click="addTag(tag)">add tag</button>
+            <button type="button" class="btn btn-success" ng-click="addPost()">Save</button>
+        </div>
+    </div>
+    <h3 ng-click="toggle = !toggle" ng-hide="toggle" class="text-center">{{post.title}}</h3>
     <input type="text" class="form-control" placeholder="title" ng-show="toggle" ng-blur="toggle = !toggle"
            ng-model="post.title">
 
