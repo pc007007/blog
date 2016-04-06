@@ -210,19 +210,26 @@ app.controller('blogUpdateController', function ($http, $scope, Post, $state, $l
 
 });
 app.controller('blogSearchController', function ($http, $scope, $state, $log, $stateParams) {
+    var self = this;
 
     $scope.currentPage = 1;
     $scope.pageSize = 7;
     $scope.maxSize = 7;
 
-    this.setPage = function (currentPage) {
+    self.setPage = function (currentPage) {
         $http.get('/api/posts/search/byTag?name=' + $stateParams.tagName + '&projection=noContent' +
             '&page=' + (currentPage - 1) + '&size=' + $scope.pageSize + '&sort=pubDate,desc').success(function (data) {
             $scope.posts = data._embedded.posts;
             $scope.totalElements = data.page.totalElements;
+            $log.log($scope.totalElements);
         });
     };
-    this.setPage(1);
+    self.setPage(1);
+
+    $scope.$watch('currentPage',function(current){
+        self.setPage(current);
+    });
+
     $scope.tagName = $stateParams.tagName;
-    
+
 });
