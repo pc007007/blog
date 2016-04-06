@@ -2,14 +2,15 @@
 
     <!-- Blog Post Content Column -->
     <div class="col-md-12">
-        <h2 class="post">All Posts <a class="btn btn-info" ui-sref="post" role="button" ng-show="authenticated">New
-            Post</a></h2>
-        <div class="post-item" ng-repeat="post in blogCtrl.posts">
+        <h2 class="post">{{tagName}} <a ui-sref="blog"><i class="fa fa-paper-plane-o"></i>&nbsp;Back</a>
+            <a class="btn btn-info" ui-sref="post" role="button" ng-show="authenticated">NewPost</a>
+        </h2>
+        <div class="post-item" ng-repeat="post in posts">
             <a ui-sref="detail({blogId:post.id})">
                 <h2>{{post.title}}</h2>
                 <p>{{post.pubDate | date: 'longDate'}}</p>
                 <div class="tag_label" ng-repeat=" tag in post.tags">
-                    <a class="label" href="/#!/blog/search/{{tag.name}}" ng-style="{'background-color':'#'+tag.color}" >{{tag.name}}</a>&nbsp;
+                    <a class="label" href="/#!/blog/search/{{tag.name}}" ng-style="{'background-color':'#'+tag.color}">{{tag.name}}</a>&nbsp;
                 </div>
             </a>
             <div class="pull-right" ng-show="authenticated">
@@ -20,7 +21,7 @@
     </div>
 
     <nav class="text-center">
-        <uib-pagination total-items="blogCtrl.totalElements" ng-model="currentPage" max-size="maxSize"
+        <uib-pagination total-items="totalElements" ng-model="currentPage" max-size="maxSize"
                         class="pagination-sm"
                         boundary-link-numbers="true" rotate="false" items-per-page="pageSize"
                         previous-text='Prev'></uib-pagination>

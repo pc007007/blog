@@ -28,6 +28,12 @@ app.config(function ($stateProvider) {
             controller: 'blogUpdateController',
             controllerAs: 'blogUpdateCtrl'
         })
+        .state('search', {
+            url: '/blog/search/:tagName',
+            templateUrl: '/blogApp/blog/partial-blog-search.html',
+            controller: 'blogSearchController',
+            controllerAs: 'blogSearchCtrl'
+        })
     ;
 });
 app.controller('blogController', function ($http, $state, $scope) {
@@ -202,4 +208,21 @@ app.controller('blogUpdateController', function ($http, $scope, Post, $state, $l
         });
     };
 
+});
+app.controller('blogSearchController', function ($http, $scope, $state, $log, $stateParams) {
+
+    $scope.currentPage = 1;
+    $scope.pageSize = 7;
+    $scope.maxSize = 7;
+
+    this.setPage = function (currentPage) {
+        $http.get('/api/posts/search/byTag?name=' + $stateParams.tagName + '&projection=noContent' +
+            '&page=' + (currentPage - 1) + '&size=' + $scope.pageSize + '&sort=pubDate,desc').success(function (data) {
+            $scope.posts = data._embedded.posts;
+            $scope.totalElements = data.page.totalElements;
+        });
+    };
+    this.setPage(1);
+    $scope.tagName = $stateParams.tagName;
+    
 });
