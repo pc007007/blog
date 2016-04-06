@@ -113,6 +113,25 @@ app.controller('blogPostController', function ($http, $scope, Post, $state, $log
     $scope.removeTag = function(tag){
         _.remove($scope.tags, tag);
     };
+
+    var flag = false;
+    $scope.showTag = function () {
+        if(!flag) {
+            $http.get('/api/tags/distinct').success(function (data) {
+                $log.log(data);
+                $scope.distinct_tags = data;
+                flag = true
+            });
+        }
+    };
+
+    $scope.addShowTag = function(tag) {
+        var a = {};
+        a.name = tag[0];
+        a.color = tag[1];
+        $scope.tags.push(a);
+    };
+
 });
 app.controller('blogUpdateController', function ($http, $scope, Post, $state, $log, $stateParams) {
     $scope.post = new Post();
@@ -161,6 +180,24 @@ app.controller('blogUpdateController', function ($http, $scope, Post, $state, $l
         $http.put('/api/posts/' + $stateParams.blogId, $scope.post).success(function () {
             $state.go('blog');
         });
+    };
+
+    var flag = false;
+    $scope.showTag = function () {
+        if(!flag) {
+            $http.get('/api/tags/distinct').success(function (data) {
+                $log.log(data);
+                $scope.distinct_tags = data;
+                flag = true
+            });
+        }
+    };
+
+    $scope.addShowTag = function(tag) {
+        var a = {};
+        a.name = tag[0];
+        a.color = tag[1];
+        $scope.tags.push(a);
     };
 
 });

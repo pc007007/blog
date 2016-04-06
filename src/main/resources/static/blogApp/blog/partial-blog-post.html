@@ -5,9 +5,11 @@
     <br>
     <hr>
     <div class="btn-group" role="group" ng-repeat="tag in tags">
-        <button type="button" class="btn btn-danger" ng-style="{'background-color':'#'+tag.color}">{{tag.name}}</button>
+        <button type="button" class="btn" style="color: white" ng-style="{'background-color':'#'+tag.color}">{{tag.name}}</button>
         <button class="btn btn-danger" ng-click="removeTag(tag)"><span class="glyphicon glyphicon-trash"></span></button>
     </div>
+    <br>
+    <button type="text" uib-popover-template="'myPopoverTemplate.html'"  popover-trigger="focus" class="btn btn-default" ng-click="showTag()" popover-placement="right">find tags</button>
     <br>
     tag name:<input type="text" ng-model="tag.name">
     tag color:<input type="text" ng-model="tag.color">
@@ -18,5 +20,10 @@
            ng-model="post.title">
 
     <div ui-ace id="inputText" ng-model="post.content"></div>
+
+    <script type="text/ng-template" id="myPopoverTemplate.html">
+        <h4>Choose from here:</h4>
+        <button type="button" class="btn" style="color: white;" ng-repeat="d_tag in distinct_tags" ng-click="addShowTag(d_tag)" ng-style="{'background-color':'#'+d_tag[1]}">{{d_tag[0]}}</button>&nbsp;
+    </script>
 
 </div>

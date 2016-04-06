@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   profiles:
-    active: production
+    active: dev
   data:
     rest:
       base-path: /api
@@ -22,7 +22,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
     properties:
       hibernate:
