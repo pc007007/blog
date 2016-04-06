@@ -2,14 +2,15 @@
 
     <!-- Blog Post Content Column -->
     <div class="col-md-12">
-        <h2 class="post">All Posts <a class="btn btn-info" ui-sref="post" role="button" ng-show="authenticated">New Post</a></h2>
+        <h2 class="post">All Posts <a class="btn btn-info" ui-sref="post" role="button" ng-show="authenticated">New
+            Post</a></h2>
         <div class="post-item" ng-repeat="post in blogCtrl.posts">
             <a ui-sref="detail({blogId:post.id})">
                 <h2>{{post.title}}</h2>
-                <span ng-repeat=" tag in post.tags">
+                <p>{{post.pubDate | date: 'longDate'}}</p>
+                <div class="tag_label" ng-repeat=" tag in post.tags">
                     <span class="label" ng-style="{'background-color':'#'+tag.color}">{{tag.name}}</span>&nbsp;
-                </span>
-                <p>{{post.pubDate | date: 'medium'}}</p>
+                </div>
             </a>
             <div class="pull-right" ng-show="authenticated">
                 <button type="button" class="btn btn-warning" ng-click="changePost(post)">change</button>
@@ -19,7 +20,8 @@
     </div>
 
     <nav class="text-center">
-        <uib-pagination total-items="blogCtrl.totalElements" ng-model="currentPage" max-size="maxSize" class="pagination-sm"
+        <uib-pagination total-items="blogCtrl.totalElements" ng-model="currentPage" max-size="maxSize"
+                        class="pagination-sm"
                         boundary-link-numbers="true" rotate="false" items-per-page="pageSize"
                         previous-text='Prev'></uib-pagination>
     </nav>

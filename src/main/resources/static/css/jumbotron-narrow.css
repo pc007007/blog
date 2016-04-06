@@ -148,3 +148,7 @@ pre{
     color: #C2D3DA;
     background-color: #333333;
 }
+
+.tag_label {
+    display: inline-block;
+}

@@ -2,6 +2,7 @@ package com.chengp.entity;
 
 import org.springframework.data.rest.core.config.Projection;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ interface PostNoContent {
 
     String getAuthor();
 
-    String getPubDate();
+    Date getPubDate();
 
     List<Tag> getTags();
 }
