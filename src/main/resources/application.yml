@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   profiles:
-    active: dev
+    active: prod
   data:
     rest:
       base-path: /api
@@ -30,7 +30,7 @@ spring:
 
 ---
 spring:
-  profiles: production
+  profiles: prod
   datasource:
      type: com.zaxxer.hikari.HikariDataSource
      pool-name: SpringBootHikariCP
