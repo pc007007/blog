@@ -170,7 +170,6 @@ app.controller('blogUpdateController', function ($http, $scope, Post, $state, $l
         a.name = tag.name;
         a.color = tag.color;
         a.post = location.origin + '/api/posts/' + $stateParams.blogId;
-        $log.log(a);
         $http.post('/api/tags',a).success(function () {
             $scope.tags.push(a);
         });
@@ -198,6 +197,9 @@ app.controller('blogUpdateController', function ($http, $scope, Post, $state, $l
         a.name = tag[0];
         a.color = tag[1];
         $scope.tags.push(a);
+        $http.post('/api/tags',a).success(function () {
+            $scope.tags.push(a);
+        });
     };
 
 });
