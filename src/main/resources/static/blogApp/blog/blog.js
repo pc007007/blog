@@ -196,7 +196,7 @@ app.controller('blogUpdateController', function ($http, $scope, Post, $state, $l
         var a = {};
         a.name = tag[0];
         a.color = tag[1];
-        $scope.tags.push(a);
+        a.post = location.origin + '/api/posts/' + $stateParams.blogId;
         $http.post('/api/tags',a).success(function () {
             $scope.tags.push(a);
         });
