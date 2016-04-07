@@ -21,7 +21,7 @@ public class Tag {
     @Column(name = "color")
     private String color;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
 
