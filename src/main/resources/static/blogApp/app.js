@@ -12,7 +12,6 @@ var blogApp = angular.module('blogApp', [
     'blogApp.home',
     'blogApp.blog',
     'blogApp.project',
-    'blogApp.services',
     'blogApp.auth'
 ]);
 

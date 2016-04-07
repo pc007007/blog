@@ -1,8 +1,8 @@
 /**
  * Created by pc on 3/24/16.
  */
-var app = angular.module("blogApp.blog", []);
-app.config(function ($stateProvider) {
+var blog = angular.module("blogApp.blog", []);
+blog.config(function ($stateProvider) {
     $stateProvider
         .state('blog', {
             url: '/blog',
@@ -36,38 +36,31 @@ app.config(function ($stateProvider) {
         })
     ;
 });
-app.controller('blogController', function ($http, $state, $scope) {
+blog.controller('blogController', function ($http, $state, $scope, blogService) {
     var self = this;
-
+    $scope.maxSize = 7;
     $scope.currentPage = 1;
     $scope.pageSize = 7;
 
-    self.setPage = function (currentPage) {
-        $http.get('/api/posts?projection=noContent&page=' + (currentPage-1) + '&size=' + $scope.pageSize + '&sort=pubDate,desc').success(function (data) {
-
+    var setPage = function (currentPage) {
+        blogService.getCurrentPost(currentPage,$scope.pageSize).then(function (data) {
             self.posts = data._embedded.posts;
-            
-            self.totalElements = data.page.totalElements;
+            self.totalElements = data.page.totalElements
         });
     };
-
-    self.setPage(1);
-
+    
     $scope.$watch('currentPage',function(current){
-        self.setPage(current);
+        setPage(current);
     });
-
+    
     $scope.deletePost = function (post) {
-        $http.delete('/api/posts/' + post.id).success(function () {
-            _.remove(self.posts, post);
-        })
+        blogService.deletePost(self.posts,post);
     };
     $scope.changePost = function (post) {
         $state.go('update', {blogId: post.id});
     };
-    $scope.maxSize = 7;
 });
-app.controller('blogDetailController', function ($http, $stateParams, $scope) {
+blog.controller('blogDetailController', function ($http, $stateParams, $scope, $log) {
     var self = this;
     $http.get('/api/posts/' + $stateParams.blogId).success(function (data) {
         self.post = data;
@@ -75,15 +68,16 @@ app.controller('blogDetailController', function ($http, $stateParams, $scope) {
         self.post.id = self.post._links.self.href;
 
         self.post.content = marked(data.content);
+
+        $log.log(self.post.id);
     });
 
     $http.get('/api/posts/' + $stateParams.blogId + '/tags').success(function (data) {
         $scope.tags = data._embedded.tags;
     });
 });
-app.controller('blogPostController', function ($http, $scope, Post, $state, $log) {
-    $scope.post = new Post();
-
+blog.controller('blogPostController', function ($http, $scope, $state, $log) {
+    $scope.post = {};
     $scope.post.title = 'title';
     $scope.post.content = '';
     $scope.post.author = 'pc';
@@ -97,9 +91,7 @@ app.controller('blogPostController', function ($http, $scope, Post, $state, $log
 
     $scope.addPost = function () {
         $scope.post.pubDate = Date.now();
-/*        $http.post("/api/posts",$scope.post).success(function(){
-            $state.go('blog');
-        });*/
+
         $http.post("/api/posts",$scope.post).then(function(response){
             $scope.tags.forEach(function(tag){
                tag.post = response.data._links.self.href;
@@ -124,7 +116,6 @@ app.controller('blogPostController', function ($http, $scope, Post, $state, $log
     $scope.showTag = function () {
         if(!flag) {
             $http.get('/api/tags/distinct').success(function (data) {
-                $log.log(data);
                 $scope.distinct_tags = data;
                 flag = true
             });
@@ -137,16 +128,15 @@ app.controller('blogPostController', function ($http, $scope, Post, $state, $log
         a.color = tag[1];
         $scope.tags.push(a);
     };
-
 });
-app.controller('blogUpdateController', function ($http, $scope, Post, $state, $log, $stateParams) {
-    $scope.post = new Post();
+blog.controller('blogUpdateController', function ($http, $scope, $state, $log, $stateParams) {
+
+    $scope.post = {};
 
     $scope.post.title = '';
     $scope.post.content = '';
     $scope.post.author = 'pc';
-
-
+    $scope.tags = [];
 
     $scope.$watch('post.content', function (current) {
         $scope.outputText = marked(current);
@@ -162,7 +152,6 @@ app.controller('blogUpdateController', function ($http, $scope, Post, $state, $l
 
     $http.get('/api/posts/' + $stateParams.blogId + '/tags').success(function (data) {
         $scope.tags = data._embedded.tags;
-        $log.log($scope.tags);
     });
 
     $scope.removeTag = function(tag){
@@ -176,7 +165,8 @@ app.controller('blogUpdateController', function ($http, $scope, Post, $state, $l
         a.name = tag.name;
         a.color = tag.color;
         a.post = location.origin + '/api/posts/' + $stateParams.blogId;
-        $http.post('/api/tags',a).success(function () {
+        $http.post('/api/tags',a).success(function (data) {
+            a.id = data.id;
             $scope.tags.push(a);
         });
     };
@@ -203,31 +193,29 @@ app.controller('blogUpdateController', function ($http, $scope, Post, $state, $l
         a.name = tag[0];
         a.color = tag[1];
         a.post = location.origin + '/api/posts/' + $stateParams.blogId;
-        $http.post('/api/tags',a).success(function () {
+        $http.post('/api/tags',a).success(function (data) {
+            a.id = data.id;
             $scope.tags.push(a);
         });
     };
 
 });
-app.controller('blogSearchController', function ($http, $scope, $state, $log, $stateParams) {
-    var self = this;
+blog.controller('blogSearchController', function ($http, $scope, $state, $log, $stateParams) {
 
     $scope.currentPage = 1;
     $scope.pageSize = 7;
     $scope.maxSize = 7;
 
-    self.setPage = function (currentPage) {
+    var setPage = function (currentPage) {
         $http.get('/api/posts/search/byTag?name=' + $stateParams.tagName + '&projection=noContent' +
             '&page=' + (currentPage - 1) + '&size=' + $scope.pageSize + '&sort=pubDate,desc').success(function (data) {
             $scope.posts = data._embedded.posts;
             $scope.totalElements = data.page.totalElements;
-            $log.log($scope.totalElements);
         });
     };
-    self.setPage(1);
 
     $scope.$watch('currentPage',function(current){
-        self.setPage(current);
+        setPage(current);
     });
 
     $scope.tagName = $stateParams.tagName;
