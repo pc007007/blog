@@ -5,7 +5,6 @@ var blogApp = angular.module('blogApp', [
     'ui.router',
     'ngSanitize',
     'ngDisqus',
-    'ui.ace',
     'ui.bootstrap',
     'ngResource',
     'lodash',

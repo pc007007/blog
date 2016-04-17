@@ -1,7 +1,7 @@
 /**
  * Created by pc on 3/24/16.
  */
-var blog = angular.module("blogApp.blog", []);
+var blog = angular.module("blogApp.blog", ['ui.ace']);
 blog.config(function ($stateProvider) {
     $stateProvider
         .state('blog', {
@@ -132,7 +132,6 @@ blog.controller('blogPostController', function ($http, $scope, $state, $log) {
 blog.controller('blogUpdateController', function ($http, $scope, $state, $log, $stateParams) {
 
     $scope.post = {};
-
     $scope.post.title = '';
     $scope.post.content = '';
     $scope.post.author = 'pc';
